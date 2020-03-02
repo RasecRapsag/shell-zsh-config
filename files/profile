@@ -1,0 +1,28 @@
+#
+# ln -sv ~/.hollow/profile ~/.profile
+# cat ~/.profile
+#
+
+# Se estiver executando o bash
+if [ -n "$BASH_VERSION" ]; then
+    if [ -f "$HOME/.bashrc" ]; then
+	. "$HOME/.bashrc"
+    fi
+fi
+
+# Configura o PATH para incluir pasta bin no home
+if [ -d "$HOME/.hollow/bin" ] ; then
+    PATH="$HOME/.hollow/bin:$PATH"
+fi
+
+# Configura o PATH para incluir pasta bin local
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+# Ubuntu make installation of Android Studio
+export ANDROID_HOME=/home/cgaspar/.local/share/umake/android/android-studio
+export ANDROID_SDK=/home/cgaspar/.local/share/umake/android/android-studio
+
+# Ubuntu make installation of Ubuntu Make binary symlink
+PATH=/home/cgaspar/.local/share/umake/bin:$PATH
