@@ -1,0 +1,134 @@
+"###############################################################################
+"
+" Arquivo de Configuração do VIM
+"
+"###############################################################################
+" ln -sv ~/.hollow/vim/vimrc ~/.vimrc
+" cat ~/.vimrc
+"###############################################################################
+
+"-------------------------------------------------------------------------------
+" Define o tamanho da tabulação
+set tabstop=4
+set shiftwidth=4
+
+"-------------------------------------------------------------------------------
+" Linha de status branca
+set laststatus=2
+set statusline=%m%<%F%=Linha:\ %l\ Coluna:\ %c\ %p%%
+"
+"-------------------------------------------------------------------------------
+"Mostra o par do parenteses/chaves recem fechado
+set sm
+"Auto identar o codigo
+set autoindent
+"
+"set nonumber
+"set backup
+setlocal cm=blowfish2
+"-------------------------------------------------------------------------------
+" Quando abrir o arquivo já deixa o cursor no final da última linha digitada
+au BufReadPost * if line("'\"") | execute("normal `\"") | endif
+"
+"-------------------------------------------------------------------------------
+" Faz aceitar letras maiusculas na linha de comando
+cab W w
+cab Wq wq
+cab wQ wq
+cab WQ wq
+cab Q q
+cab X x
+"
+"-------------------------------------------------------------------------------
+" Palavras-chave para destacar em qualquer tipo de arquivo
+syn keyword p_c cesar césar Cesar César
+syn keyword p_c augusto Augusto gaspar Gaspar
+hi p_c ctermfg=blue
+"
+"-------------------------------------------------------------------------------
+" Digitando a abreviação e <ENTER> o texto correspondente é mostrado
+iab cag Cesar A. Gaspar
+iab @@ rasec.rapsag@gmail.com
+"
+"-------------------------------------------------------------------------------
+" Teclas de Atalho (F1, F2 ... F12)
+"
+"###############################################################################
+" Tecla F1. Esconde comentários dentro do texto (Função).
+" Se a variável hiddcomm não existir, ela será criada. Depois faz os comentários
+" ficarem pretos, se já estiverem pretos os comentários voltam ao normal
+fu! Comentario()
+  if !exists('g:ativo')
+    let g:ativo=1 | hi Comment ctermfg=black guifg=black
+  else
+    unlet g:ativo | hi Comment ctermfg=cyan guifg=cyan term=bold
+  endif
+endfu
+map <F1> :call Comentario()<cr>
+imap <F1> <esc>:call Comentario()<cr>a
+"
+"###############################################################################
+" Tecla F2. Salvar texto.
+imap <F2> <esc>:w<cr>a
+ map <F2> :w<cr>
+"
+"###############################################################################
+" Tecla F3. Numeração das linhas.
+fu! Num()
+	if !exists('g:nume')
+		let g:nume=1 | set nu
+	else
+		unlet g:nume | set nonu
+	endif
+endfu
+map <F3> :call Num()<cr>
+imap <F3> <esc>:call Num()<cr>a
+"
+"###############################################################################
+" Tecla F4. Cabeçalho de Bash Script.
+imap <F4> #!/bin/bash<cr>
+		\# Script desenvolvido por cag<cr>
+		\# E-mail: @@<cr><cr>
+
+ map <F4> i#!/bin/bash<cr>
+		\# Script desenvolvido por cag<cr>
+		\# E-mail: @@<cr><cr>
+"
+"###############################################################################
+" Tecla F5. Tecla de Atalho Ctrl + D. Imprime a data e hora atual
+map <F5> :r!date<cr>
+      \:s/ \(...\) \(..\).*\(....\)$/, \2 de \1 de \3/<cr>
+      \:nohl<cr>
+imap <F5> <esc>:r!date<cr>
+      \:s/ \(...\) \(..\).*\(....\)$/, \2 de \1 de \3/<cr>
+      \:nohl<cr>
+"
+"###############################################################################
+" Tecla F6.
+"
+"###############################################################################
+" Tecla F7. Complementa uma palavra já usada no texto.
+imap <F7> <c-n>
+"
+"###############################################################################
+" Tecla F8. Mostra as palavras seguintes a palavra completada com F7.
+imap <F8> <c-x><c-n>
+"###############################################################################
+" Tecla F9.
+"
+"###############################################################################
+" Tecla F10.
+"
+"###############################################################################
+" Tecla F11.
+"
+"###############################################################################
+" Tecla F12. Salva e sai do vim.
+imap <F12> <esc>:wqa!<cr>
+ map <F12> :wqa!<cr>
+"
+"-------------------------------------------------------------------------------
+" Exibe uma mensagem ao sair do vim
+au VimLeave * echo "\t\tvim 6.0 - Cesar A. Gaspar"
+"
+

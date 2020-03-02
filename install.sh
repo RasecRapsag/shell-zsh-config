@@ -21,3 +21,12 @@ fi
 
 cp -rfv files/bash ~/${DIR}/
 ln -sv ~/${DIR}/bash/bashrc ~/.bashrc
+
+## Vim config
+echo -e "\nVim config"
+if [ -f ~/.vimrc ] || [ -L ~/.vimrc ]; then
+    rm -v ~/.vimrc
+fi
+
+cp -rfv files/vim ~/${DIR}/
+ln -sv ~/${DIR}/vim/vimrc ~/.vimrc
