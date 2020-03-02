@@ -1,0 +1,70 @@
+#
+# ln -sv ~/.hollow/bash/bashrc ~/.bashrc
+# cat ~/.bashrc
+#
+
+# Se não estiver executando de forma interativa, não irá fazer nada
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+# Ignora linhas repetidas e que iniciam com espaços
+HISTCONTROL=ignoreboth
+
+# Acrescenta ao arquivo de histórico, ao invés de substituir
+shopt -s histappend
+
+# Atualiza a linhas e colunas se necessário após cada comando
+shopt -s checkwinsize
+
+# Tamanho máximo do arquivo de históricos de comandos
+HISTSIZE=50000
+HISTFILESIZE=100000
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# Definições de alias
+if [ -f ~/.hollow/bash/bash_aliases ]; then
+    . ~/.hollow/bash/bash_aliases
+fi
+
+# Função de completar comandos no bash
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+# Função para completar comandos no sudo
+complete -cf sudo
+
+# Cores no manpages
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
+export MOZ_DISABLE_PANGO=1
+
+# Exibição e cores do terminal bash
+red="\[\\033[31m\]"
+green="\[\\033[32m\]"
+yellow="\[\\033[33m\]"
+cyan="\[\\033[36m\]"
+white="\[\\033[37m\]"
+purple="\[\\033[35m\]"
+default="\[\\033[0m\]"
+
+PS1="$green┌──[$yellow\u$red@$yellow\h$green:$cyan\W$green]\n└───($cyan\t$green)$white\\$ $default"
+#PS1="┌─( $green\u$default ) - ( $purple$(uname -r)$default ) - ( $cyan\w$default )\n└─> "
+
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+complete -C ~/.hollow/bin/terraform terraform
