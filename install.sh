@@ -2,7 +2,7 @@
 
 DIR=".hollow"
 
-mkdir -pv ~/${DIR}/{bash,bin,tmux,vim,zsh}
+mkdir -pv ~/${DIR}/{bash,bin,share,tmux,vim,zsh}
 
 ## Profile config
 echo -e "Profile config"
@@ -30,3 +30,13 @@ fi
 
 cp -rfv files/vim ~/${DIR}/
 ln -sv ~/${DIR}/vim/vimrc ~/.vimrc
+
+
+## Vim config
+echo -e "\nTmux config"
+if [ -f ~/.tmux.conf ] || [ -L ~/.tmux.conf ]; then
+    rm -v ~/.tmux.confs
+fi
+
+cp -rfv files/tmux ~/${DIR}/
+ln -sv ~/${DIR}/tmux/tmux.conf ~/.tmux.conf
