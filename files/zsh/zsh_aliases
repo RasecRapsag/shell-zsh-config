@@ -1,0 +1,15 @@
+# Define important alias
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
+alias vi='vim'
+alias dfs='df -Th | egrep -v "(snap|run|tmpfs)"'
+alias fk='fkill'
+
+# apt commands
+alias apt-update='sudo apt update && sudo apt upgrade -y && sudo pkcon refresh && sudo pkcon update'
+alias apt-clean='sudo apt clean && sudo apt autoclean && sudo apt -y autoremove'

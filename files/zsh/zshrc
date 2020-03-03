@@ -1,0 +1,83 @@
+#
+# ln -sv ~/.hollow/zsh/zshrc ~/.zshrc
+# cat ~/.zshrc
+#
+
+# PATH OH-MY-ZSH INSTALLATION
+export ZSH="/home/cgaspar/.oh-my-zsh"
+
+export TERM="xterm-256color"
+
+# SET ZSH THEME
+#ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+POWERLEVEL9K_MODE="nerdfont-complete"
+
+# PROMPT SETS
+POWERLEVEL9K_DISABLE_RPROMPT=true
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+#POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+
+# PROMPT PREFIX
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
+POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%B%F{green}%m%b %F{yellow}➤%F{white} "
+
+# PROMPT ELEMENTS
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir_writable dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(time)
+
+# TIME COLOR CUSTOMIZATION
+#POWERLEVEL9K_TIME_BACKGROUND='blue'
+#POWERLEVEL9K_TIME_FOREGROUND='black'
+
+# Case-sensitive completion
+#CASE_SENSITIVE="true"
+
+# Time Stamp shown in the history command output
+HIST_STAMPS="mm/dd/yyyy"
+
+# Plugins
+plugins=(
+    git
+    zsh-syntax-highlighting
+    #zsh-autosuggestions
+)
+
+source $ZSH/oh-my-zsh.sh
+
+#
+# User configuration
+#
+
+# Fuzzy Finder
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Load asdf
+if [[ -f "$HOME/.asdf/asdf.sh" ]]; then
+    . "$HOME/.asdf/asdf.sh"
+
+    # Load completions
+    if [[ -f "$HOME/.asdf/completions/asdf.bash" ]]; then
+        . "$HOME/.asdf/completions/asdf.bash"
+    fi
+fi
+
+# Zsh alias file
+if [ -f ~/.hollow/zsh/zsh_aliases ]; then
+    . ~/.hollow/zsh/zsh_aliases
+fi
+
+# Configurações para o Tmux
+source  ~/.hollow/tmux/tmux
+
+if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
+    tmux attach -t $USER || tmux new -s $USER
+fi
+
+# Auto complete do AWS
+if [ -f ~/.hollow/bin/aws_zsh_completer.sh ]; then
+    . ~/.hollow/bin/aws_zsh_completer.sh
+fi
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform
