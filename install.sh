@@ -72,6 +72,7 @@ fi
 
 cp -rfv files/zsh ~/${DIR}/
 ln -sv ~/${DIR}/zsh/zshrc ~/.zshrc
+ln -s ~/${DIR}/zsh/aws_zsh_completer.sh ~/${DIR}/bin
 
 clear
 source ~/.zshrc
