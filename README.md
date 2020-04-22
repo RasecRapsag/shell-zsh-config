@@ -4,7 +4,7 @@ Configuração de ambiente shell para utilização em KDE Neon e Ubuntu.
 
 ![Zsh Shell](zsh.png)
 
-> É necessário instalar utilizar o terminal com a fonte Hack Nerd Font
+> É necessário instalar e configura no terminal, a fonte Hack Nerd Font.
 
 ## Ambiente
 
