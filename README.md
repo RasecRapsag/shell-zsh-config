@@ -1,10 +1,10 @@
-# Configuração do shell com Zsh
+# Configuração do terminal com Zsh
 
 Configuração de ambiente shell para utilização em KDE Neon e Ubuntu.
 
 ![Zsh Shell](zsh.png)
 
-> É necessário instalar e configura no terminal, a fonte Hack Nerd Font.
+> É necessário instalar e configurar a fonte Hack Nerd Font no terminal.
 
 ## Ambiente
 
@@ -23,5 +23,3 @@ $ git clone https://github.com/RasecRapsag/shell-zsh-config
 $ cd shell-zsh-config
 $ zsh install.sh
 ```
-
-
